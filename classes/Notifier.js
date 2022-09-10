@@ -178,7 +178,7 @@ class Notifier {
     const platformName = "help";
     const propsOfProps = {
       title: "Welcome to help center",
-      description: "This is help center",
+      description: "Listed all the commands and supported coding platforms",
       color: "0x0099ff",
     };
     const propsOfHelp = makeProps(
