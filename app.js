@@ -23,7 +23,8 @@ client.on("ready", () => {
 
   setInterval(() => {
     notifier.broadcastContestDetails();
-  }, 1000 * 60 * 30);
+    console.log(new Date(Date.now()).toString());
+  }, 1000 * 60 * 60 * 3);
 });
 
 // 1018371881734258758
