@@ -22,7 +22,7 @@ client.on("ready", () => {
   notifier.getChannelsToNotify();
   setInterval(() => {
     notifier.broadcastContestDetails();
-  }, 1000 * 60 * 60 * 3);
+  }, 1000 * 60);
 });
 
 module.exports = app;
