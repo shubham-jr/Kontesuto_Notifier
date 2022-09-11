@@ -25,9 +25,9 @@ class Notifier {
       let isChannelPresent = false;
       guild.channels.cache.find((c) => {
         if (c.name === "kontesuto_notifier") {
-          if (this.channelsToNotify.includes(c.id) === true) {
+          if (this.channelsToNotify.includes(c.id) === false) {
+            this.channelsToNotify.push(c.id);
           }
-          this.channelsToNotify.push(c.id);
           isChannelPresent = true;
         }
       });
@@ -81,14 +81,14 @@ class Notifier {
     );
     let embedOfCodechef, embedOfCodeforces;
     console.log(this.channelsToNotify);
-    if (codeChefContests.length !== 0) {
+    if (codeChefContests.length !== 0 && this.channelsToNotify.length !== 0) {
       embedOfCodechef = createEmdeb(propsOfCodechef);
       this.channelsToNotify.forEach((id) => {
         const channel = this.client.channels.cache.get(`${id}`);
-        channel.send({ embeds: [embedOfCodechef] });
+        if (channel) channel.send({ embeds: [embedOfCodechef] });
       });
     }
-    if (codeforcesContests.length !== 0) {
+    if (codeforcesContests.length !== 0 && this.channelsToNotify.length !== 0) {
       embedOfCodeforces = createEmdeb(propsOfCodeforces);
       this.channelsToNotify.forEach((id) => {
         const channel = this.client.channels.cache.get(`${id}`);
