@@ -11,7 +11,7 @@ class Notifier {
     this.channelsToNotify = [];
   }
   getChannelsToNotify() {
-    this.channelsToNotify.forEach((id) => {});
+    console.log(this.channelsToNotify);
   }
   isChannelCorrect(channelId) {
     let flag = false;
