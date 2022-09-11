@@ -17,6 +17,13 @@ mongoose
   .catch((err) => {
     console.log(err);
   });
+
+app.get("/", (req, res, next) => {
+  res.status(200).json({
+    status: "success",
+  });
+});
+
 app.listen(port, () => {
   console.log(`server running on port ${port}`);
 });
