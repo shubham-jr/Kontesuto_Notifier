@@ -18,11 +18,11 @@ client.on("ready", () => {
   notifier.onMessage();
   setInterval(() => {
     notifier.createChannelIfNotPresent();
-  }, 1000 * 10);
-  notifier.getChannelsToNotify();
-  setInterval(() => {
-    notifier.broadcastContestDetails();
-  }, 1000 * 60);
+  }, 1000 * 15);
+  // notifier.getChannelsToNotify();
+  // setInterval(() => {
+  //   notifier.broadcastContestDetails();
+  // }, 1000 * 15);
 });
 
 module.exports = app;

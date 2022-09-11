@@ -25,6 +25,8 @@ class Notifier {
       let isChannelPresent = false;
       guild.channels.cache.find((c) => {
         if (c.name === "kontesuto_notifier") {
+          if (this.channelsToNotify.includes(c.id) === true) {
+          }
           this.channelsToNotify.push(c.id);
           isChannelPresent = true;
         }
@@ -78,6 +80,7 @@ class Notifier {
       allPlatformsUrl.codeforces.url
     );
     let embedOfCodechef, embedOfCodeforces;
+    console.log(this.channelsToNotify);
     if (codeChefContests.length !== 0) {
       embedOfCodechef = createEmdeb(propsOfCodechef);
       this.channelsToNotify.forEach((id) => {
