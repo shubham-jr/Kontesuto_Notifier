@@ -23,7 +23,11 @@ client.on("ready", () => {
 
   setInterval(() => {
     notifier.broadcastContestDetails();
-  }, 1000 * 60 * 60 * 3);
+  }, 1000 * 60 * 60 * 1);
 });
+
+// 1018371881734258758
+// 1018363753332482138
+// 1018362747072807024
 
 module.exports = app;

@@ -58,7 +58,7 @@ class Notifier {
     const propsOfProps = {
       title: "Contests In 24hrs",
       description:
-        "Hi folks, feeling bored?? Mee too. let's participate in contests and increase dopmaine",
+        "Hi folks, feeling bored?? Mee too. let's participate in contests and increase our problem solving skills",
       color: "0x0099ff",
     };
     const propsOfCodechef = makeProps(
