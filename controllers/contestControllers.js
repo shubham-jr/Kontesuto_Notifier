@@ -4,10 +4,12 @@ const url = "https://www.kontests.net/api/v1/";
 
 const utc_To_ist = (contestData) => {
   contestData.forEach((contest) => {
-    contest.start_time = new Date(contest.start_time).toString();
-    contest.end_time = new Date(contest.end_time).toString();
-    contest.start_time = contest.start_time.split(" ").splice(0, 5).join(" ");
-    contest.end_time = contest.end_time.split(" ").splice(0, 5).join(" ");
+    contest.start_time = new Date(contest.start_time).toLocaleString("en-US", {
+      timeZone: "Asia/Kolkata",
+    });
+    contest.end_time = new Date(contest.end_time).toLocaleString("en-US", {
+      timeZone: "Asia/Kolkata",
+    });
   });
 
   return contestData;
@@ -53,5 +55,6 @@ const getContestDetails = async (currentContestDetails, platform) => {
     currentContestDetails,
     contestData
   );
+  console.log(in_24_hours_contest);
   return in_24_hours_contest;
 };
