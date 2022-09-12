@@ -1,6 +1,5 @@
 //https://www.kontests.net/api
 const axios = require("axios");
-const lodash = require("lodash");
 const url = "https://www.kontests.net/api/v1/";
 
 const utc_To_ist = (contestData) => {
@@ -14,16 +13,6 @@ const utc_To_ist = (contestData) => {
   return contestData;
 };
 
-const getTime = (contestData) => {
-  contestData.forEach((contest) => {
-    if (parseInt(contest.duration.split(" ")[0]) <= 8) {
-      contest.start_time = contest.start_time.split(" ")[4];
-      contest.end_time = contest.end_time.split(" ")[4];
-    }
-  });
-  return contestData;
-};
-
 const duration_status_conversion = (contestData) => {
   contestData.forEach((contest) => {
     contest.duration = `${parseFloat(contest.duration / 3600)} hrs`;
@@ -34,9 +23,9 @@ const duration_status_conversion = (contestData) => {
   return contestData;
 };
 
-const get_in_24_hours_contests = (currentContestDetails, contestData) => {
+const get_in_24_hours_contests = (isCurrentContestDetails, contestData) => {
   let in_24_hours_contests = [];
-  if (currentContestDetails) {
+  if (isCurrentContestDetails) {
     contestData.forEach((contest) => {
       if (contest.in_24_hours == "Yes" || contest.status === "running")
         in_24_hours_contests.push(contest);
@@ -47,23 +36,13 @@ const get_in_24_hours_contests = (currentContestDetails, contestData) => {
   }
 };
 
-exports.supportedSites = async () => {
-  let { data: allSites } = await axios.get(`${url}sites`);
-  return sites;
-};
-
-exports.showContestDeatils = async (
-  isFormat,
-  currentContestDetails,
-  platform
-) => {
+exports.showContestDeatils = async (currentContestDetails, platform) => {
   let contests = await getContestDetails(currentContestDetails, platform);
-  // if (currentContestDetails) contests = getTime(contests);
   let newContests = [];
   contests.forEach((contest, id) => {
     newContests.push(contest);
   });
-  if (!isFormat) return newContests;
+  return newContests;
 };
 
 const getContestDetails = async (currentContestDetails, platform) => {

@@ -5,6 +5,8 @@ const catchAsync = require("./../utils/catchAsync");
 const platformMapped = require("./../utils/platformsMapped");
 const platformUrls = require("./../utils/allPlatformsUrl");
 const allPlatformsUrl = require("./../utils/allPlatformsUrl");
+const helper = require("./../utils/helper");
+const { help } = require("./../utils/allPlatformsUrl");
 class Notifier {
   constructor(client) {
     this.client = client;
@@ -44,14 +46,14 @@ class Notifier {
     });
   }
 
+  passProps = () => {};
+
   broadcastContestDetails = catchAsync(async () => {
     const codeforcesContests = await contestController.showContestDeatils(
-      false,
       true,
       "codeforces"
     );
     const codeChefContests = await contestController.showContestDeatils(
-      false,
       true,
       "code_chef"
     );
@@ -101,7 +103,6 @@ class Notifier {
     const isCurrentContest = mainCommand === "all" ? false : true;
 
     const platformContests = await contestController.showContestDeatils(
-      false,
       isCurrentContest,
       platformMapped[platformName]
     );
@@ -117,17 +118,21 @@ class Notifier {
       color: "0x0099ff",
     };
     let totalContests = platformContests.length;
-    if (totalContests > 3) {
-      totalContests = parseInt(totalContests / 3 + (totalContests % 3 ? 1 : 0));
+    const embedLimit = 3;
+    // embed message limit is 6000b
+    if (totalContests > embedLimit) {
+      totalContests = parseInt(
+        totalContests / embedLimit + (totalContests % embedLimit ? 1 : 0)
+      );
     } else totalContests = 1;
     let embedOfPlatform = [];
     for (let i = 0; i < totalContests; i++) {
       if (i > 5) break;
-      let start = 3 * i;
+      let start = embedLimit * i;
       let end =
-        start + 3 - 1 > platformContests.length - 1
+        start + embedLimit - 1 > platformContests.length - 1
           ? platformContests.length - 1
-          : start + 3 - 1;
+          : start + embedLimit - 1;
       let platformContestsInTriplets = [];
       platformContests.forEach((contest, id) => {
         if (id >= start && id <= end) platformContestsInTriplets.push(contest);
@@ -152,16 +157,7 @@ class Notifier {
       if (!this.isChannelCorrect(message.channelId)) return;
       let command = message.content.toLocaleLowerCase().split(" ");
       if (command[0] !== "!") return;
-      if (
-        command[1] === "codechef" ||
-        command[1] === "codeforces" ||
-        command[1] === "atcoder" ||
-        command[1] === "hackerrank" ||
-        command[1] === "hackerearth" ||
-        command[1] === "leetcode" ||
-        command[1] === "kickstart" ||
-        command[1] === "topcoder"
-      )
+      if (helper.allPlatforms.includes(command[1]))
         this.onPlatform(message, command[1], command[2]);
       else if (command[1] === "help") this.onHelp(message);
     });
@@ -194,38 +190,7 @@ class Notifier {
       platformUrls[`${platformName}`].url
     );
 
-    propsOfHelp.value = `
-***Help***
-
-***Following Coding Platform Supported***
-
-***codeforces***
-***codechef***
-***atcoder***
-***topcoder***
-***kickstart***
-***leetcode***
-***hackerrank***
-***hackerearth***
-
-***Commands [Note : ALL COMMANDS STARTS WITH EXCLAMATION MARK !]***
-
-1) ***! platform_name : This command gives all the contest of the specified platform which is going to happen in 24hrs***
-
-2) ***! platform_name all : This command gives all the upcoming contest of the specified platform***
-
-***Examples***
- 
-***To see all upcoming contests of codechef***
-***! codechef all***
-
-***To see the contest of codechef that is going to happen in 24hrs***
-***! codechef***
-
-Thanks :smiley:
-
-**Github https://github.com/shubham-jr/Kontesuto_Notifier** 
-    `;
+    propsOfHelp.value = helper.helpMessage;
 
     const helpEmbed = [createEmdeb(propsOfHelp)];
     this.reply(message, helpEmbed);
