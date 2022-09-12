@@ -4,15 +4,24 @@ const url = "https://www.kontests.net/api/v1/";
 
 const utc_To_ist = (contestData) => {
   contestData.forEach((contest) => {
-    contest.start_time = new Date(contest.start_time).toLocaleString("en-US", {
-      timeZone: "Asia/Kolkata",
-    });
-    contest.end_time = new Date(contest.end_time).toLocaleString("en-US", {
-      timeZone: "Asia/Kolkata",
-    });
+    contest.start_time = convertDateFormat(
+      new Date(contest.start_time).toLocaleString("en-US", {
+        timeZone: "Asia/Kolkata",
+      })
+    );
+    contest.end_time = convertDateFormat(
+      new Date(contest.end_time).toLocaleString("en-US", {
+        timeZone: "Asia/Kolkata",
+      })
+    );
   });
 
   return contestData;
+};
+
+const convertDateFormat = (date) => {
+  const dateArray = date.split("/");
+  return [dateArray[1], dateArray[0], dateArray[2]].join("/");
 };
 
 const duration_status_conversion = (contestData) => {
