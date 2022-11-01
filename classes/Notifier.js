@@ -86,6 +86,7 @@ class Notifier {
     if (codeChefContests.length !== 0 && this.channelsToNotify.length !== 0) {
       embedOfCodechef = createEmdeb(propsOfCodechef);
       this.channelsToNotify.forEach((id) => {
+        if (id === "1019591796675858442") return;
         const channel = this.client.channels.cache.get(`${id}`);
         if (channel) channel.send({ embeds: [embedOfCodechef] });
       });
