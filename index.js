@@ -1,6 +1,6 @@
-const dotenv = require("dotenv");
+// const dotenv = require("dotenv");
 const mongoose = require("mongoose");
-dotenv.config({ path: "./env/config.env" });
+// dotenv.config({ path: "./env/config.env" });
 
 const app = require("./app");
 const port = process.env.PORT || 3333;
