@@ -46,3 +46,6 @@ To see the all upcomming contest of codechef = ! codechef all
 Note: you can use platform name in any case like Codechef, codechef, CODECHEF, cOdeChef etc
 
 You will get the remainder of contests that will begin in 24hrs. The bot should remind you in every 3hrs.
+
+Bot Invite Token
+https://discord.com/oauth2/authorize?client_id=1069112018205933598&scope=bot&permissions=1
