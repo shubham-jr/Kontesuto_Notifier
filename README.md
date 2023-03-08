@@ -48,4 +48,4 @@ Note: you can use platform name in any case like Codechef, codechef, CODECHEF, c
 You will get the remainder of contests that will begin in 24hrs. The bot should remind you in every 3hrs.
 
 Bot Invite Token
-https://discord.com/oauth2/authorize?client_id=1069112018205933598&scope=bot&permissions=1
+https://discord.com/oauth2/authorize?client_id=1069112018205933598&scope=bot&permissions=139049921584
