@@ -6,8 +6,6 @@ A contest notifier for "cp" lovers &lt;3
 
 A bot that remind you the coding contest happening on various coding platforms and also it gives you the list of upcoming coding contests.
 
-A bot that remind you the coding contest happening on various coding platforms and also it gives you the list of upcoming coding contests.
-
 Permissions : Have permissions to create channel and read/send message in channel.
 
 Why permission to create channel??
